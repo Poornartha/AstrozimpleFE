@@ -29,7 +29,7 @@ export const loadUser = () => (dispatch, getState) => {
         config.headers['Authorization'] = `Token ${token}` 
     }
 
-    axios.get('http://localhost:8000/api/auth/user', config)
+    axios.get('https://8000-yellow-dolphin-xbvf55hs.ws-us21.gitpod.io/api/auth/user', config)
     .then(res => {
         dispatch({
             type: USER_LOADED,
@@ -56,7 +56,7 @@ export const login = (username, password) => (dispatch) => {
     // Request Body
     const body = JSON.stringify({username, password})
 
-    axios.post('http://localhost:8000/api/auth/login', body, config)
+    axios.post('https://8000-yellow-dolphin-xbvf55hs.ws-us21.gitpod.io/api/auth/login', body, config)
     .then(res => {
         dispatch({
             type: LOGIN_SUCCESS,
@@ -70,3 +70,5 @@ export const login = (username, password) => (dispatch) => {
         }
     )
 }
+
+4
