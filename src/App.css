@@ -3,8 +3,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
 }
+/* 
+.numerbanner {
+  background-image: `url("../src/components/NumerologyBanner.jpg") `;
+} */
 
 .navbar {
   background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
