@@ -26,10 +26,18 @@ function Navbar() {
 
   return (
     <>
+<<<<<<< HEAD
       <nav className="navbar">
         <div className="navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
             AstroZimple <i class="fab fa-typo3" />
+=======
+      <nav className='navbar'>
+        <div className='navbar-container'>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            TRVL
+            <i className='fab fa-typo3' />
+>>>>>>> cfd9c4abab491753f0ce1fb5b80b771933c816d3
           </Link>
           <div className="menu-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"} />
@@ -61,11 +69,16 @@ function Navbar() {
 
             <li>
               <Link
+<<<<<<< HEAD
                 to="/sign-up"
                 className="nav-links-mobile"
+=======
+                to='/login'
+                className='nav-links-mobile'
+>>>>>>> cfd9c4abab491753f0ce1fb5b80b771933c816d3
                 onClick={closeMobileMenu}
               >
-                Sign Up
+                Login
               </Link>
             </li>
           </ul>
