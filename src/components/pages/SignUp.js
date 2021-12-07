@@ -1,9 +1,13 @@
 import React from 'react'
 import '../../App.css'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
+import { register } from '../../actions/auth'; 
+import { createMessage } from '../../actions/messages';
 
-export default function SignUp() {
+function SignUp(props) {
 
     const [values, setValues] = useState({
         username: '',
@@ -44,11 +48,30 @@ export default function SignUp() {
         }));
     };
 
+    const onSubmit = (e) => {
+      e.preventDefault();
+      const {username, email, password, password2} = values
+      if (password !== password2) {
+        props.createMessage({passwordNotMatched: 'Passwords do not match'})
+      } else {
+        const newUser = {
+          username,
+          password,
+          email
+        }
+        props.register(newUser)
+      }
+    }
+
+    if(props.isAuthenticated) {
+      return <Redirect to='/' />
+  }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="px-20 py-6 text-left bg-white shadow-lg">
           <h2 className="text-2xl font-bold text-center">Register</h2>
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="mt-4 px-10">
               <div className="mt-4">
               <label className="block">Username</label>
@@ -104,6 +127,15 @@ export default function SignUp() {
       </div>
     );
 
-
-
 }
+
+SignUp.propTypes = {
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, {register, createMessage})(SignUp)

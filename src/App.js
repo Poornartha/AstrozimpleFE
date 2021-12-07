@@ -12,16 +12,26 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth'
 import { useEffect } from 'react';
+import AlertTemplate from 'react-alert-template-basic';
+import Alerts from './components/utilities/Alerts'
+import { Provider as AlertProvider } from 'react-alert';
+
+// Alert Options
+const alertOptions = {
+  timeout: 3000,
+  position: 'top center',
+};
 
 function App() {
 
   useEffect(() => {
-    store.dispatch(loadUser);
+    store.dispatch(loadUser());
   })
 
   return (
     <>
     <Provider store={store}>
+    <AlertProvider template={AlertTemplate} {...alertOptions}>
     <Router>
       <Navbar />
       <Switch>
@@ -34,6 +44,8 @@ function App() {
         <Route path="/astrology" exact component={Astrology} />
       </Switch>
     </Router>
+    <Alerts />
+    </AlertProvider>
     </Provider>
     </>
   );
