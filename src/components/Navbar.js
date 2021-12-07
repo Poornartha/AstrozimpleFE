@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../actions/auth';
 
-function Navbar() {
+function Navbar(props) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -23,6 +26,26 @@ function Navbar() {
   }, []);
 
   window.addEventListener('resize', showButton);
+
+  const { isAuthenticated, user } = props.auth;
+  
+  const authLinks = (
+      <Link
+        to='/'
+        onClick={props.logout}
+      >
+        <Button buttonStyle='btn--outline'>LOGOUT</Button>
+      </Link>
+  )
+
+  const guestLinks = (
+      <Link
+        to='/login'
+        onClick={closeMobileMenu}
+      >
+        <Button buttonStyle='btn--outline'>LOGIN</Button>
+      </Link>
+  )
 
   return (
     <>
@@ -59,22 +82,21 @@ function Navbar() {
                 Products
               </Link>
             </li>
-
-            <li>
-              <Link
-                to='/login'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Login
-              </Link>
-            </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          { isAuthenticated ? authLinks : guestLinks}
         </div>
       </nav>
     </>
   );
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+
+export default connect(mapStateToProps, {logout})(Navbar);
