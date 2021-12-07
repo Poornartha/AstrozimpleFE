@@ -25,7 +25,7 @@ function Navbar(props) {
     showButton();
   }, []);
 
-  window.addEventListener('resize', showButton);
+  window.addEventListener("resize", showButton);
 
   const { isAuthenticated, user } = props.auth;
   
@@ -55,35 +55,35 @@ function Navbar(props) {
             TRVL
             <i className='fab fa-typo3' />
           </Link>
-          <div className='menu-icon' onClick={handleClick}>
-            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+          <div className="menu-icon" onClick={handleClick}>
+            <i className={click ? "fas fa-times" : "fas fa-bars"} />
           </div>
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
                 Home
               </Link>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <Link
-                to='/services'
-                className='nav-links'
+                to="/services"
+                className="nav-links"
                 onClick={closeMobileMenu}
               >
                 Services
               </Link>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <Link
-                to='/products'
-                className='nav-links'
+                to="/products"
+                className="nav-links"
                 onClick={closeMobileMenu}
               >
                 Products
               </Link>
             </li>
-          </ul>
           { isAuthenticated ? authLinks : guestLinks}
+          </ul>
         </div>
       </nav>
     </>
